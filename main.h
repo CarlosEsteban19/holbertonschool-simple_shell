@@ -9,6 +9,11 @@
 
 #define MAX_ARGS 10
 
+/**
+ * struct env_var - structure to hard code enviroment variables
+ * @name: name of enviroment variable
+ * @value: value of enviroment variable
+ */
 struct env_var
 {
 char *name;
