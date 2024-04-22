@@ -18,9 +18,11 @@ int main(void)
 			free(input);
 			input = NULL;
 			printf("\n");
-			break; /*eof (ctrl+D*/
+			break; /*eof (ctrl+D)*/
 		}
-		input[strcspn(input, "\n")] = '\0'; /*trim trailing '\n'*/
+		/* trim trailing newline*/
+		if (input[strlen(input) - 1] == '\n')
+			input[strlen(input) - 1] = '\0';
 		args = parse_input(input); /*tokenize user input*/
 		if (args == NULL)
 		{
@@ -35,8 +37,8 @@ int main(void)
 				free(args);
 				break;  /*Exit the shell*/
 			}
-			if (execute_or_find_command(args) != 0)
-				printf("Error executing command.\n");
+			else
+				(execute_or_find_command(args));
 		}
 		free(args);
 	}
