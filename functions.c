@@ -39,8 +39,9 @@ char **parse_input(char *input)
 	token = strtok(input, " \n");
 	while (token != NULL && num_args < MAX_ARGS - 1)
 	{
-		args[num_args++] = token;
+		args[num_args] = token;
 		token = strtok(NULL, " \n");
+		num_args++;
 	}
 	args[num_args] = NULL;
 	return (args);
@@ -83,8 +84,7 @@ int execute_or_find_command(char **args)
 	/* Check if the command is a full path */
 	if (access(args[0], X_OK) == 0)
 	{
-		if (execute_command(args) != 0)
-			printf("Error executing command.\n");
+		execute_command(args);
 	}
 	else
 	{
@@ -101,8 +101,7 @@ int execute_or_find_command(char **args)
 			if (access(command_path, X_OK) == 0)
 			{
 				args[0] = command_path; /* Update command with full path */
-				if (execute_command(args) != 0)
-					printf("Error executing command.\n");
+				execute_command(args);
 				free(command_path);
 				free(path_copy);
 				return (0); /*Command found and executed successfully*/
