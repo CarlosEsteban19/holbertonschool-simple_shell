@@ -16,13 +16,12 @@ int main(void)
 		if (getline(&input, &bufsize, stdin) == -1)
 		{
 			free(input);
-			input = NULL;
 			printf("\n");
 			break; /*eof (ctrl+D)*/
 		}
 		/* trim trailing newline*/
-		if (input[strlen(input) - 1] == '\n')
-			input[strlen(input) - 1] = '\0';
+		if (input[strlen(input)] == '\n')
+			input[strlen(input)] = '\0';
 		args = parse_input(input); /*tokenize user input*/
 		if (args == NULL)
 		{
