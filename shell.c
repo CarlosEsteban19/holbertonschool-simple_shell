@@ -12,11 +12,10 @@ int main(void)
 	while (1)
 	{
 		if (isatty(fileno(stdin)))
-			printf("$");
+			printf("$ ");
 		if (getline(&input, &bufsize, stdin) == -1)
 		{
 			free(input);
-			printf("\n");
 			break; /*eof (ctrl+D)*/
 		}
 		/* trim trailing newline*/
