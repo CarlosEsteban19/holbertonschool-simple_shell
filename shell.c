@@ -11,7 +11,7 @@ int main(void)
 
 	while (1)
 	{
-		if (isatty(fileno(stdin)))
+		if (isatty(STDIN_FILENO))
 			printf("$ ");
 		if (getline(&input, &bufsize, stdin) == -1)
 		{
