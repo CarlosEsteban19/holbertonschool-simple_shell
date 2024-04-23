@@ -62,9 +62,9 @@ int execute_command(char **args)
 	}
 	else if (pid == 0) /*Child process*/
 	{
-		if (execvp(args[0], args) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
-			perror("execvp");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -110,7 +110,7 @@ int execute_or_find_command(char **args)
 			dir = strtok(NULL, ":");
 		}
 		free(path_copy);
-		printf("Command not found: %s\n", args[0]);
+		printf("%s: not found\n", args[0]);
 		return (-1); /*Command not found*/
 	}
 	return (0); /*Command executed successfully*/
