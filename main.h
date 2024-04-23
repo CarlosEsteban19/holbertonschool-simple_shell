@@ -20,6 +20,7 @@ char *name;
 char *value;
 };
 
+extern char **environ;
 char *_getenv(const char *name);
 char **parse_input(char *input);
 int execute_command(char **args);
