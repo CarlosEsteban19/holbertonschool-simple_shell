@@ -12,7 +12,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(fileno(stdin)))
-			printf("$ ");
+			printf("$");
 		if (getline(&input, &bufsize, stdin) == -1)
 		{
 			free(input);
