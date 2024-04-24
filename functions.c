@@ -6,17 +6,14 @@
  */
 char *_getenv(const char *name)
 {
-	int i;
-	static struct env_var enviroment[] = {
-		{"PATH", "/usr/bin:/bin"},
-		/*add more enviroment variables here*/
-		{NULL, NULL}
-	};
+	size_t name_len = strlen(name);
+	char **env = environ;
 
-	for (i = 0; enviroment[i].name != NULL; i++)
+	while (*env != NULL)
 	{
-		if (strcmp(enviroment[i].name, name) == 0)
-			return (enviroment[i].value);
+		if (strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
+			return (&(*env)[name_len + 1]); /*Return the value after '='*/
+		env++;
 	}
 	return (NULL); /*Environment variable not found*/
 }

@@ -9,17 +9,6 @@
 
 #define MAX_ARGS 10
 
-/**
- * struct env_var - structure to hard code enviroment variables
- * @name: name of enviroment variable
- * @value: value of enviroment variable
- */
-struct env_var
-{
-char *name;
-char *value;
-};
-
 extern char **environ;
 char *_getenv(const char *name);
 char **parse_input(char *input);
