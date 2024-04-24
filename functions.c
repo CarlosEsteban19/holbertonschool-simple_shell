@@ -68,10 +68,11 @@ int execute_command(char **args)
 	else /*Parent process*/
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 
 		if (WIFEXITED(status))
-			return WEXITSTATUS(status);
+			return (WEXITSTATUS(status));
 		else if (WIFSIGNALED(status))
 		{
 			fprintf(stderr, "Terminated by signal %d\n", WTERMSIG(status));
