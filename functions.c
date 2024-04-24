@@ -67,7 +67,16 @@ int execute_command(char **args)
 	}
 	else /*Parent process*/
 	{
-		wait(NULL);
+		int status;
+		waitpid(pid, &status, 0);
+
+		if (WIFEXITED(status))
+			return WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			fprintf(stderr, "Terminated by signal %d\n", WTERMSIG(status));
+			return (-1);
+		}
 	}
 	return (0);
 }
@@ -107,7 +116,6 @@ int execute_or_find_command(char **args)
 			dir = strtok(NULL, ":");
 		}
 		free(path_copy);
-		printf("%s: not found\n", args[0]);
 		return (-1); /*Command not found*/
 	}
 	return (0); /*Command executed successfully*/
