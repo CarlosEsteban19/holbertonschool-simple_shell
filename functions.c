@@ -74,9 +74,14 @@ int execute_command(char **args)
 			perror("wait");
 			return (-1);
 		}
-		return (status); /*return child process exit status*/
+		if (WIFEXITED(status)) /*checks if child terminated normally*/
+		{
+			return (WEXITSTATUS(status)); /*return child process exit status*/
+		}
+		else
+			return (-1);
 	}
-	return (0);
+	return (-1);
 }
 /**
  * execute_or_find_command - checks command input for execution
