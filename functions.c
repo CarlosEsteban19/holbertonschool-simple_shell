@@ -69,15 +69,12 @@ int execute_command(char **args)
 	{
 		int status;
 
-		waitpid(pid, &status, 0);
-
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
+		if (wait(&status) == -1)
 		{
-			fprintf(stderr, "Terminated by signal %d\n", WTERMSIG(status));
+			perror("wait");
 			return (-1);
 		}
+		return (status); /*return child process exit status*/
 	}
 	return (0);
 }
