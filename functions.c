@@ -91,7 +91,7 @@ int execute_or_find_command(char **args)
 	/* Check if the command is a full path */
 	if (access(args[0], X_OK) == 0)
 	{
-		execute_command(args);
+		return (execute_command(args));
 	}
 	else
 	{
