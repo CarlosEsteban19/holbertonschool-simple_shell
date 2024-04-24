@@ -37,7 +37,11 @@ $ echo Hello World!
 Hello World!
 $
 ```
-
+### For further help
+For further help with the simple shell, and with which commands it runs; install our man page and run it with:  
+```
+man ./man_1_simple_shell
+```
 ## Contributors
 Carlos Esteban Colón Cintrón (<carlos-esteban.colon-cintron@holbertonstudents.com>)  
 Louis Martínez Echevarría (<louis.martinez-echevarria@holbertonstudents.com>)
