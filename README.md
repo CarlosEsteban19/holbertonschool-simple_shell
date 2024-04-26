@@ -4,13 +4,16 @@ The shell is a program that takes commands from the keyboard and gives them to t
 
 ## Installation
 1- Clone repository  
-> https://github.com/CarlosEsteban19/holbertonschool-simple_shell.git  
+> git clone https://github.com/CarlosEsteban19/holbertonschool-simple_shell.git  
 
 2- Compile files  
 > gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 3- Run shell command   
-> ./hsh  
+> ./hsh
+
+4- Exit with the exit command  
+> exit  
 
 ## Libraries
 
@@ -37,6 +40,41 @@ $ echo Hello World!
 Hello World!
 $
 ```
+pwd
+```
+$ pwd
+/home/.../holbertonschool-simple_shell
+$
+```
+### Some other commands that work
+```
+pwd
+```
+```
+ls
+```
+```
+less
+```
+```
+file
+```
+```
+cp
+```
+```
+rm
+```
+```
+mkdir
+```
+```
+touch
+```
+```
+clear
+```
+and more  
 ### For further help
 For further help with the simple shell, and with which commands it runs; install our man page and run it with:  
 ```
