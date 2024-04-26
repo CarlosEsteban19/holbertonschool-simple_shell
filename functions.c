@@ -6,17 +6,14 @@
  */
 char *_getenv(const char *name)
 {
-	int i;
-	static struct env_var enviroment[] = {
-		{"PATH", "/usr/bin:/bin"},
-		/*add more enviroment variables here*/
-		{NULL, NULL}
-	};
+	size_t name_len = strlen(name);
+	char **env = environ;
 
-	for (i = 0; enviroment[i].name != NULL; i++)
+	while (*env != NULL)
 	{
-		if (strcmp(enviroment[i].name, name) == 0)
-			return (enviroment[i].value);
+		if (strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
+			return (&(*env)[name_len + 1]); /*Return the value after '='*/
+		env++;
 	}
 	return (NULL); /*Environment variable not found*/
 }
@@ -70,9 +67,21 @@ int execute_command(char **args)
 	}
 	else /*Parent process*/
 	{
-		wait(NULL);
+		int status;
+
+		if (wait(&status) == -1)
+		{
+			perror("wait");
+			return (-1);
+		}
+		if (WIFEXITED(status)) /*checks if child terminated normally*/
+		{
+			return (WEXITSTATUS(status)); /*return child process exit status*/
+		}
+		else
+			return (-1);
 	}
-	return (0);
+	return (-1);
 }
 /**
  * execute_or_find_command - checks command input for execution
@@ -84,7 +93,7 @@ int execute_or_find_command(char **args)
 	/* Check if the command is a full path */
 	if (access(args[0], X_OK) == 0)
 	{
-		execute_command(args);
+		return (execute_command(args));
 	}
 	else
 	{
@@ -110,7 +119,6 @@ int execute_or_find_command(char **args)
 			dir = strtok(NULL, ":");
 		}
 		free(path_copy);
-		printf("%s: not found\n", args[0]);
 		return (-1); /*Command not found*/
 	}
 	return (0); /*Command executed successfully*/
